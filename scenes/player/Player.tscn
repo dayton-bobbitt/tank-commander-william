@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player/assets/tankDark_barrel1_outline.png" type="Texture" id=2]
@@ -9,6 +9,12 @@
 [ext_resource path="res://scenes/player/Bullet.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/explosion/Explosion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/HealthBar.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sounds/zapsplat_tank_idling.mp3" type="AudioStream" id=10]
+[ext_resource path="res://sounds/zapsplat_tank_driving.mp3" type="AudioStream" id=11]
+[ext_resource path="res://sounds/zapsplat_40mm_cannon.mp3" type="AudioStream" id=12]
+[ext_resource path="res://sounds/zapsplat_grenade.mp3" type="AudioStream" id=13]
+[ext_resource path="res://sounds/zapsplat_vehicle_explosion.mp3" type="AudioStream" id=14]
+[ext_resource path="res://sounds/zapsplat_explosion_medium.mp3" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 30 )
@@ -27,6 +33,9 @@ extents = Vector2( 10, 26.4 )
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 1.25, 1.25 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 HealthBar = ExtResource( 9 )
 MAX_HEALTH = 50
 
@@ -67,12 +76,37 @@ position = Vector2( 0, -52 )
 wait_time = 0.75
 one_shot = true
 
+[node name="AudioStreamCannon" type="AudioStreamPlayer" parent="Turret"]
+stream = ExtResource( 12 )
+volume_db = -12.0
+
 [node name="Explosion" parent="." instance=ExtResource( 8 )]
 visible = false
 scale = Vector2( 0.792857, 0.792857 )
 frame = 0
 playing = false
 
+[node name="AudioStreamIdle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -30.0
+
+[node name="AudioStreamDriving" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -28.0
+
+[node name="AudioStreamImpact" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -15.0
+
+[node name="AudioStreamImpactExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -8.0
+
+[node name="AudioStreamExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -10.0
+
 [connection signal="animation_finished" from="Turret/BarrelFlash" to="Turret" method="_on_BarrelFlash_animation_finished"]
 [connection signal="timeout" from="Turret/ReloadTimer" to="Turret" method="_on_ReloadTimer_timeout"]
 [connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
+[connection signal="finished" from="AudioStreamExplosion" to="." method="_on_AudioStreamExplosion_finished"]

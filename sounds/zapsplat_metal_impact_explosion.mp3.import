@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zapsplat_metal_impact_explosion.mp3-7ccde2c27200da00cbcb6a133c0b2ea8.mp3str"
+
+[deps]
+
+source_file="res://sounds/zapsplat_metal_impact_explosion.mp3"
+dest_files=[ "res://.import/zapsplat_metal_impact_explosion.mp3-7ccde2c27200da00cbcb6a133c0b2ea8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

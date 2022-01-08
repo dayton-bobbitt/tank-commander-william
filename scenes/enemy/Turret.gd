@@ -16,6 +16,7 @@ func aim_at(target: Vector2, delta: float):
 func shoot():
 	if ready_to_shoot:
 		ready_to_shoot = false
+		$AudioStream2DCannon.play()
 		$ReloadTimer.start()
 		play_barrel_flash_anim()
 		var bullet = BULLET.instance()

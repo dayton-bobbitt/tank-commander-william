@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zapsplat_40mm_cannon.mp3-eec40e443352dcd0465bce4163cb48ae.mp3str"
+
+[deps]
+
+source_file="res://sounds/zapsplat_40mm_cannon.mp3"
+dest_files=[ "res://.import/zapsplat_40mm_cannon.mp3-eec40e443352dcd0465bce4163cb48ae.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

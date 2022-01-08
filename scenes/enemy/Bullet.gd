@@ -18,6 +18,8 @@ func _physics_process(delta):
 	if collision != null:
 		self.destroyed = true
 		
+		$CollisionShape2D.set_deferred("disabled", true)
+		
 		if collision.collider.has_method("take_damage"):
 			var destroyed = collision.collider.take_damage(attackPower)
 			
@@ -28,11 +30,12 @@ func _physics_process(delta):
 		elif collision.collider.name == "Bullet":
 			collision.collider.queue_free()
 			play_hit_animation()
+		else:
+			self.queue_free()
 
 
 func play_hit_animation():
 	$Sprite.hide()
-	$CollisionShape2D.set_deferred("disabled", true)
 	$Explosion.play()
 	$Explosion.show()
 

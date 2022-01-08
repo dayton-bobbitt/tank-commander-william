@@ -29,7 +29,7 @@ func start_game():
 
 func spawn_player():
 	player = player_scene.instance()
-	player.position = player_spawn.position
+	player.global_position = player_spawn.position
 	player.connect("player_dead", self, "game_over")
 	add_child(player)
 
@@ -51,7 +51,7 @@ func spawn_enemy():
 	var random_road = roads[0]
 	
 	var enemy = enemy_tank.instance()
-	
+	enemy.player = player
 	enemy.rotation = PI / 2
 	enemies.append(enemy)
 	

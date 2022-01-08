@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zapsplat_tank_idling.mp3-bb6943c61967e558e724fdec66c630c2.mp3str"
+
+[deps]
+
+source_file="res://sounds/zapsplat_tank_idling.mp3"
+dest_files=[ "res://.import/zapsplat_tank_idling.mp3-bb6943c61967e558e724fdec66c630c2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

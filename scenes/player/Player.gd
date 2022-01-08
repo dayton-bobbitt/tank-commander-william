@@ -12,6 +12,9 @@ export var ANGULAR_MAX_SPEED = PI
 export var MAX_HEALTH = 40
 
 
+onready var audioStreamImpact = $AudioStreamImpact
+onready var audioStreamImpactExplosion = $AudioStreamImpactExplosion
+onready var audioStreamExplosion = $AudioStreamExplosion
 var linear_velocity = Vector2.ZERO
 var destroyed = false
 var health: int
@@ -35,8 +38,14 @@ func update_linear_velocity():
 	if direction != Vector2.ZERO:
 		linear_velocity += direction.rotated(self.rotation).normalized() * self.LINEAR_ACCELERATION
 		linear_velocity = linear_velocity.clamped(self.LINEAR_MAX_SPEED)
+		if !$AudioStreamDriving.playing:
+			$AudioStreamDriving.play()
+			$AudioStreamIdle.stop()
 	else:
 		linear_velocity = linear_velocity.move_toward(Vector2.ZERO, LINEAR_FRICTION)
+		if !$AudioStreamIdle.playing:
+			$AudioStreamDriving.stop()
+			$AudioStreamIdle.play()
 
 
 func get_tank_rotation():
@@ -83,6 +92,8 @@ func take_damage(damage):
 	self.health -= damage
 	
 	self.healthBar.update_health_bar(MAX_HEALTH, health)
+	audioStreamImpact.play()
+	audioStreamImpactExplosion.play()
 	
 	if health <= 0:
 		self.destroy()
@@ -92,9 +103,9 @@ func take_damage(damage):
 
 
 func destroy():
-	emit_signal("player_dead")
 	self.destroyed = true
 	healthBar.queue_free()
+	audioStreamExplosion.play()
 	$Sprite.hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Turret.hide()
@@ -103,5 +114,9 @@ func destroy():
 
 
 func _on_Explosion_animation_finished():
-	# TODO: DEFEAT
+	$Explosion.hide()
+
+
+func _on_AudioStreamExplosion_finished():
 	self.queue_free()
+	emit_signal("player_dead")
