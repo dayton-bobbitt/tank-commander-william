@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/world/SmallTree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/world/assets/treeBrown_small.png" type="Texture" id=2]
+[ext_resource path="res://scenes/explosion/Explosion.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 33.0
+
+[node name="SmallTree" type="StaticBody2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Explosion" parent="." instance=ExtResource( 3 )]
+visible = false
+scale = Vector2( 0.541667, 0.541667 )
+animation = "with_smoke"
+frame = 0
+playing = false
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
