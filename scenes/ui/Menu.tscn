@@ -1,0 +1,193 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/ui/Menu.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://scenes/ui/Anton/Anton-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=14]
+size = 64
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://scenes/ui/Anton/Anton-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=15]
+size = 48
+font_data = SubResource( 6 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://scenes/ui/Anton/Anton-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=16]
+size = 24
+font_data = SubResource( 11 )
+
+[sub_resource type="DynamicFontData" id=18]
+font_path = "res://scenes/ui/Anton/Anton-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=19]
+size = 32
+font_data = SubResource( 18 )
+
+[sub_resource type="DynamicFontData" id=13]
+font_path = "res://scenes/ui/Anton/Anton-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=17]
+size = 32
+font_data = SubResource( 13 )
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="TitleScreen" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="TitleScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.521569, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="TitleScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -323.5
+margin_top = -180.0
+margin_right = 323.5
+margin_bottom = -82.0
+custom_fonts/font = SubResource( 14 )
+text = "Tank Commander William"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGameButton" type="Button" parent="TitleScreen"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -412.0
+margin_right = 128.0
+margin_bottom = -320.0
+custom_fonts/font = SubResource( 15 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TitleScreen"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -53.0
+margin_right = 335.0
+margin_bottom = -16.0
+custom_fonts/font = SubResource( 16 )
+text = "Sound effects from Zapsplat.com"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LinkButton" type="LinkButton" parent="TitleScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = 255.5
+margin_right = 75.0
+margin_bottom = 304.5
+custom_fonts/font = SubResource( 19 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "How to play"
+underline = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HowToPlay" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="HowToPlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.25098, 0.521569, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="HowToPlay"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -323.5
+margin_top = 100.0
+margin_right = 323.5
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 14 )
+text = "How to play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoBackToMenuButton" type="Button" parent="HowToPlay"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -194.0
+margin_right = 128.0
+margin_bottom = -102.0
+custom_fonts/font = SubResource( 15 )
+text = "Go back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -377.5
+margin_top = -182.0
+margin_right = 377.5
+margin_bottom = 182.0
+custom_fonts/normal_font = SubResource( 17 )
+bbcode_enabled = true
+bbcode_text = "[center]Use w,a,s,d or the arrow keys to move.[center]
+[center]Use the mouse to aim[center]
+[center]Click to shoot.[center]
+[center]Destroy as many enemy tanks as you can![center]"
+text = "Use w,a,s,d or the arrow keys to move.
+Use the mouse to aim
+Click to shoot.
+Destroy as many enemy tanks as you can!"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="TitleScreen/StartGameButton" to="." method="_on_StartGameButton_pressed"]
+[connection signal="pressed" from="TitleScreen/LinkButton" to="." method="_on_LinkButton_pressed"]
+[connection signal="pressed" from="HowToPlay/GoBackToMenuButton" to="." method="_on_GoBackToMenuButton_pressed"]

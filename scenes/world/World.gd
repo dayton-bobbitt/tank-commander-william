@@ -10,7 +10,6 @@ onready var horizontal_road = $HorizontalRoad
 onready var vertical_road = $VerticalRoad
 onready var spawn_timer = $SpawnTimer
 onready var player_spawn = $PlayerSpawn
-onready var gui = $GUI
 onready var roads = [horizontal_road, vertical_road]
 var player
 var enemies = []
@@ -18,13 +17,13 @@ var enemies = []
 
 func _ready():
 	randomize()
+	start_game()
 
 
 func start_game():
 	spawn_player()
 	spawn_enemy()
 	spawn_timer.start()
-	gui.game_in_progress()
 
 
 func spawn_player():
@@ -35,13 +34,13 @@ func spawn_player():
 
 
 func game_over():
-	spawn_timer.stop()
-	for enemy in enemies:
-		if is_instance_valid(enemy):
-			enemy.queue_free()
-	
-	enemies = []
-	gui.game_over()
+#	spawn_timer.stop()
+#	for enemy in enemies:
+#		if is_instance_valid(enemy):
+#			enemy.queue_free()
+#
+#	enemies = []
+	get_tree().change_scene("res://scenes/ui/GameOver.tscn")
 
 
 func spawn_enemy():
@@ -70,8 +69,3 @@ func _physics_process(delta):
 
 func _on_SpawnTimer_timeout():
 	spawn_enemy()
-	pass
-
-
-func _on_GUI_start_game():
-	start_game()

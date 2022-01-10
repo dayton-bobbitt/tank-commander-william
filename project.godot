@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Tank Commander William"
-run/main_scene="res://scenes/world/World.tscn"
+run/main_scene="res://scenes/ui/Menu.tscn"
 config/icon="res://assets/art/icon.png"
 
 [display]
