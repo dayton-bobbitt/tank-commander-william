@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player/assets/tankDark_barrel1_outline.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://sounds/zapsplat_grenade.mp3" type="AudioStream" id=13]
 [ext_resource path="res://sounds/zapsplat_vehicle_explosion.mp3" type="AudioStream" id=14]
 [ext_resource path="res://sounds/zapsplat_explosion_medium.mp3" type="AudioStream" id=15]
+[ext_resource path="res://scenes/Smoke.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 30 )
@@ -105,6 +106,10 @@ volume_db = -8.0
 [node name="AudioStreamExplosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 volume_db = -10.0
+
+[node name="Smoke" parent="." instance=ExtResource( 16 )]
+visible = false
+position = Vector2( 0, 16 )
 
 [connection signal="animation_finished" from="Turret/BarrelFlash" to="Turret" method="_on_BarrelFlash_animation_finished"]
 [connection signal="timeout" from="Turret/ReloadTimer" to="Turret" method="_on_ReloadTimer_timeout"]

@@ -95,6 +95,11 @@ func take_damage(damage):
 	audioStreamImpact.play()
 	audioStreamImpactExplosion.play()
 	
+	var healthPercentage = (health as float) / (MAX_HEALTH as float)
+	
+	if healthPercentage <= 0.4:
+		$Smoke.show()
+	
 	if health <= 0:
 		self.destroy()
 		return true
@@ -106,6 +111,7 @@ func destroy():
 	self.destroyed = true
 	healthBar.queue_free()
 	audioStreamExplosion.play()
+	$Smoke.hide()
 	$Sprite.hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Turret.hide()
