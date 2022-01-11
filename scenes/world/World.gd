@@ -11,8 +11,10 @@ onready var vertical_road = $VerticalRoad
 onready var spawn_timer = $SpawnTimer
 onready var player_spawn = $PlayerSpawn
 onready var roads = [horizontal_road, vertical_road]
+var game_over_scene = load("res://scenes/ui/GameOver.tscn")
 var player
 var enemies = []
+var score = 0
 
 
 func _ready():
@@ -34,13 +36,9 @@ func spawn_player():
 
 
 func game_over():
-#	spawn_timer.stop()
-#	for enemy in enemies:
-#		if is_instance_valid(enemy):
-#			enemy.queue_free()
-#
-#	enemies = []
-	get_tree().change_scene("res://scenes/ui/GameOver.tscn")
+	var game_over = game_over_scene.instance()
+	game_over.score = score
+	add_child(game_over)
 
 
 func spawn_enemy():
@@ -50,6 +48,7 @@ func spawn_enemy():
 	var random_road = roads[0]
 	
 	var enemy = enemy_tank.instance()
+	enemy.connect("enemy_dead", self, "update_score")
 	enemy.player = player
 	enemy.rotation = PI / 2
 	enemies.append(enemy)
@@ -65,6 +64,11 @@ func _physics_process(delta):
 		var enemy = enemies[i]
 		if is_instance_valid(enemy) && is_instance_valid(player):
 			enemy.aim_at(player.position, delta)
+
+
+func update_score():
+	score += 1
+	$Score.text = "Score: %d" % score
 
 
 func _on_SpawnTimer_timeout():

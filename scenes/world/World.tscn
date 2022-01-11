@@ -207,7 +207,7 @@ position = Vector2( 1086.18, 159.751 )
 [node name="Crate12" parent="." instance=ExtResource( 1 )]
 position = Vector2( 864, 64 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Score" type="Label" parent="."]
 margin_left = 40.0
 margin_top = 32.0
 margin_right = 197.0

@@ -12,6 +12,7 @@ export var ANGULAR_MAX_SPEED = PI
 export var MAX_HEALTH = 40
 
 
+onready var screen_size = get_viewport_rect().size
 onready var audioStreamImpact = $AudioStreamImpact
 onready var audioStreamImpactExplosion = $AudioStreamImpactExplosion
 onready var audioStreamExplosion = $AudioStreamExplosion
@@ -75,6 +76,9 @@ func _physics_process(delta):
 	self.update_linear_velocity()
 	self.linear_velocity = self.move_and_slide(self.linear_velocity)
 	
+	self.position.x = clamp(self.position.x, 0, screen_size.x)
+	self.position.y = clamp(self.position.y, 0, screen_size.y)
+	
 	# Rotate tank body
 	var tank_rotation = self.get_tank_rotation()
 	self.rotate(tank_rotation * delta)
@@ -95,11 +99,6 @@ func take_damage(damage):
 	audioStreamImpact.play()
 	audioStreamImpactExplosion.play()
 	
-	var healthPercentage = (health as float) / (MAX_HEALTH as float)
-	
-	if healthPercentage <= 0.4:
-		$Smoke.show()
-	
 	if health <= 0:
 		self.destroy()
 		return true
@@ -111,7 +110,6 @@ func destroy():
 	self.destroyed = true
 	healthBar.queue_free()
 	audioStreamExplosion.play()
-	$Smoke.hide()
 	$Sprite.hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Turret.hide()

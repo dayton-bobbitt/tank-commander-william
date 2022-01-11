@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 
+signal enemy_dead
+
+
 export (PackedScene) var HealthBar
 export var LINEAR_MAX_SPEED = 75
 export var MAX_HEALTH = 20
@@ -79,6 +82,7 @@ func take_damage(damage):
 
 func destroy():
 	self.destroyed = true
+	emit_signal("enemy_dead")
 	healthBar.queue_free()
 	audioStream2dDriving.stop()
 	audioStream2dExplosion.play()
